@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte ao Cliente</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Cor de fundo para o corpo da página */
+            font-family: Arial, sans-serif; /* Fonte para o texto */
+            color: #333; /* Cor do texto */
+            position: relative; /* Para o posicionamento do pop-up */
+            margin-bottom: 100px; /* Espaço para os pop-ups e rodapé */
+        }
+
+        h1 {
+            color: #ff009dfa; /* Cor do título */
+        }
+
+        .pagina2 {
+            display: none; /* Ocultar a segunda página inicialmente */
+        }
+
+        form {
+            max-width: 400px; /* Largura máxima do formulário */
+            margin: 0 auto; /* Centralizar o formulário na página */
+            background-color: #fff; /* Cor de fundo para o formulário */
+            padding: 25px; /* Espaçamento interno do formulário */
+            border-radius: 8px; /* Borda arredondada do formulário */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra do formulário */
+        }
+
+        label {
+            display: block; /* Exibir rótulos em uma linha separada */
+            margin-bottom: 6px; /* Espaçamento inferior dos rótulos */
+            font-weight: bold; /* Texto em negrito para os rótulos */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%; /* Largura total dos campos de entrada */
+            padding: 8px; /* Espaçamento interno dos campos de entrada */
+            margin-bottom: 16px; /* Espaçamento inferior dos campos de entrada */
+            border: 1px solid #ccc; /* Borda dos campos de entrada */
+            border-radius: 4px; /* Borda arredondada dos campos de entrada */
+        }
+
+        input[type="submit"] {
+            background-color: #ff009dfa; /* Cor de fundo para o botão de envio */
+            color: #0e0d0d; /* Cor do texto do botão de envio */
+            padding: 10px 20px; /* Espaçamento interno do botão de envio */
+            border: none; /* Remover a borda do botão de envio */
+            border-radius: 4px; /* Borda arredondada do botão de envio */
+            cursor: pointer; /* Alterar o cursor ao passar sobre o botão de envio */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #a400b3; /* Cor de fundo do botão de envio ao passar o mouse */
+        }
+
+        /* Estilo do pop-up do rodapé */
+        .popup-footer {
+            display: none; /* Ocultar o pop-up inicialmente */
+            position: fixed; /* Ficar fixo na parte inferior */
+            left: 0;
+            bottom: 40px; /* Acima do pop-up de cookies */
+            width: 100%; /* Largura total da tela */
+            background-color: #ff009dfa; /* Cor de fundo do pop-up */
+            color: white; /* Cor do texto */
+            text-align: center; /* Centralizar o texto */
+            padding: 15px; /* Espaçamento interno do pop-up */
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Sombra do pop-up */
+            z-index: 1000; /* Colocar acima de outros elementos */
+        }
+
+        .popup-footer button {
+            margin-left: 10px; /* Espaçamento entre os botões */
+            background-color: #a400b3; /* Cor de fundo para o botão de ação */
+            border: none; /* Remover borda do botão */
+            color: white; /* Cor do texto do botão */
+            padding: 5px 10px; /* Espaçamento interno do botão */
+            border-radius: 4px; /* Bordas arredondadas do botão */
+            cursor: pointer; /* Alterar cursor ao passar sobre o botão */
+        }
+
+        /* Estilo para o pop-up de cookies */
+        #cookieConsent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            display: none; /* Oculto por padrão */
+            z-index: 1000; /* Colocar acima de outros elementos */
+        }
+
+        #cookieConsent button {
+            background-color: #ff009dfa;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        #cookieConsent button:hover {
+            background-color: #a400b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Suporte ao Cliente</h1>
+    <p>Bem-vindo ao suporte ao cliente! Entre em contato com nossos especialistas para resolver seu problema. Selecione as opções, insira seus dados e descreva seu problema.<br><br>
+        Responderemos em até 48 horas úteis. Agradecemos pela sua confiança!</p>
+    
+    <form id="formulario" method="POST" onsubmit="return validarFormulario()">
+        <!-- Página 1 - Dados do cliente -->
+        <div id="pagina1">
+            <label for="nomecliente">Nome completo:</label>
+            <input type="text" id="nomecliente" name="nomecliente" required>
+
+            <label for="cpfcliente">Digite seu CPF:</label>
+            <input type="text" id="cpfcliente" name="cpfcliente" required oninput="formatarCPF(this)" maxlength="14">
+
+            <label for="emailCliente">Digite seu e-mail:</label>
+            <input type="email" id="emailCliente" name="emailCliente" required>
+
+            <label for="celularCliente">Digite seu celular:</label>
+            <input type="text" id="celularCliente" name="celularCliente" required>
+
+            <input type="button" value="Próximo" onclick="validarPagina1()">
+        </div>
+
+        <!-- Página 2 - Dados do Indicado -->
+        <div id="pagina2" class="pagina2">
+            <h2>Formulário de Suporte</h2>
+        
+            <label for="tipoSolicitacao">Tipo de Solicitação:</label>
+            <select id="tipoSolicitacao" name="tipoSolicitacao" required>
+                <option value="">Selecione...</option>
+                <option value="duvida">Dúvida sobre o produto/serviço</option>
+                <option value="problema">Problema técnico</option>
+                <option value="reclamacao">Reclamação</option>
+                <option value="sugestao">Sugestão</option>
+                <option value="outros">Outros (especificar)</option>
+            </select>
+        
+            <label for="categoriaProduto">Categoria do Produto/Serviço:</label>
+            <select id="categoriaProduto" name="categoriaProduto" required>
+                <option value="">Selecione...</option>
+                <option value="produtoA">Produto A</option>
+                <option value="produtoB">Produto B</option>
+                <option value="servicoC">Serviço C</option>
+                <option value="servicoD">Serviço D</option>
+                <option value="outros">Outros (especificar)</option>
+            </select>
+        
+            <label for="urgencia">Urgência da Solicitação:</label>
+            <select id="urgencia" name="urgencia" required>
+                <option value="">Selecione...</option>
+                <option value="baixa">Baixa</option>
+                <option value="media">Média</option>
+                <option value="alta">Alta</option>
+                <option value="urgente">Urgente</option>
+            </select>
+        
+            <label for="contatoPreferido">Como você gostaria de ser contatado?</label>
+            <select id="contatoPreferido" name="contatoPreferido" required>
+                <option value="">Selecione...</option>
+                <option value="email">E-mail</option>
+                <option value="telefone">Telefone</option>
+                <option value="chat">Chat ao vivo</option>
+            </select>
+
+            <label for="descricaoProblema">Descrição do Problema:</label>
+            <textarea id="descricaoProblema" name="descricaoProblema" required></textarea>
+        
+            <input type="submit" value="Enviar">
+            <input type="button" value="Voltar" onclick="voltarPagina1()">
+        </div>
+    </form>
+
+    <div id="cookieConsent">
+        Este site utiliza cookies para melhorar sua experiência. 
+        <button onclick="aceitar()">Aceitar</button>
+        <button onclick="rejeitar()">Rejeitar</button>
+    </div>
+
+    <div id="popupFooter" class="popup-footer">
+        Você rejeitou a política de coleta de dados. Para mais informações, <a href="#">clique aqui</a>.
+        <button onclick="fecharPopup()">Fechar</button>
+    </div>
+
+    <script>
+        // Função para formatar o CPF
+        function formatarCPF(cpf) {
+            const valor = cpf.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            if (valor.length <= 11) {
+                cpf.value = valor.replace(/(\d{3})(\d)/, '$1.$2')
+                                 .replace(/(\d{3})(\d)/, '$1.$2')
+                                 .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            }
+        }
+
+        function validarFormulario() {
+            // Aqui você pode adicionar validações gerais para o formulário
+            alert("Formulário enviado com sucesso!");
+            return true; // Retorna verdadeiro para permitir o envio do formulário
+        }
+
+        function validarPagina1() {
+            const nome = document.getElementById('nomecliente').value;
+            const cpf = document.getElementById('cpfcliente').value;
+            const email = document.getElementById('emailCliente').value;
+            const celular = document.getElementById('celularCliente').value;
+
+            if (nome && cpf && email && celular) {
+                document.getElementById('pagina1').style.display = 'none'; // Ocultar página 1
+                document.getElementById('pagina2').style.display = 'block'; // Exibir página 2
+            } else {
+                alert("Por favor, preencha todos os campos.");
+            }
+        }
+
+        function voltarPagina1() {
+            document.getElementById('pagina2').style.display = 'none'; // Ocultar página 2
+            document.getElementById('pagina1').style.display = 'block'; // Exibir página 1
+        }
+
+        // Função para aceitar cookies
+        function aceitar() {
+            document.getElementById('cookieConsent').style.display = 'none'; // Ocultar o pop-up de cookies
+        }
+
+        // Função para rejeitar cookies
+        function rejeitar() {
+            document.getElementById('cookieConsent').style.display = 'none'; // Ocultar o pop-up de cookies
+            document.getElementById('popupFooter').style.display = 'block'; // Exibir pop-up de termos
+            alert("Você rejeitou a política de coleta de dados.");
+        }
+
+        // Função para fechar o pop-up de termos
+        function fecharPopup() {
+            document.getElementById('popupFooter').style.display = 'none'; // Ocultar o pop-up de termos
+        }
+
+        // Exibir o pop-up de cookies ao carregar a página
+        window.onload = function() {
+            document.getElementById('cookieConsent').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cute Love Pets</title>
+  <link rel="stylesheet" href="drawn.css" />
+  <style>
+    /* Fundo da página */
+    body {
+      background-image: url('Pets loves.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background-size: contain;
+        background-position: center;
+      }
+    }
+
+    /* Cabeçalho com título */
+    header {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 36px;
+      color: white;
+      margin: 0;
+    }
+
+    header h1 span {
+      color: #ff009d;
+    }
+
+    /* Container do login */
+    .container {
+      position: relative;
+    }
+
+    #login-container {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .login-field {
+      margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 200px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    input[type="submit"] {
+      padding: 8px 15px;
+      font-size: 16px;
+      background-color: #ff009dfa;
+      border: none;
+      color: black;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: white;
+    }
+
+    .login-fields {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Seções principais */
+    main {
+      position: absolute;
+      bottom: 10%; /* Subiu para evitar corte */
+      left: 10px;
+      text-align: left;
+    }
+
+    section {
+      margin: 10px 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 5px 10px;
+      font-size: 14px;
+      background-color: #f0f0f0;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      color: black;
+      cursor: pointer;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #e0e0e0;
+      border-color: #c0c0c0;
+    }
+
+    .section-text {
+      color: white;
+    }
+
+    .section-text p {
+      margin: 5px 0 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Título -->
+  <header>
+    <h1>Cute <span>Love</span> Pets</h1>
+  </header>
+
+  <!-- Login -->
+  <div id="login-container" class="container">
+    <h2>Login</h2>
+    <form action="processar_login.php" method="post">
+      <div class="login-fields">
+        <div class="login-field">
+          <label for="email">E-mail:</label>
+          <input type="text" id="email" name="email" required />
+        </div>
+        <div class="login-field">
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha" required />
+        </div>
+      </div>
+      <input type="submit" value="Entrar" />
+    </form>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <main>
+    <!-- Ofertas -->
+    <section id="ofertas" class="section-text">
+      <a href="https://isabela-d-dev-ed.lightning.force.com/lightning/page/home">
+        <button type="button">Ofertas</button>
+      </a>
+      <p>Consulte todos os pacotes disponíveis</p>
+    </section>
+
+    <!-- Novidades -->
+    <section id="novidades" class="section-text">
+      <a href="https://isabela-d-dev-ed.lightning.force.com/lightning/page/home">
+        <button type="button">Novidades</button>
+      </a>
+      <p>Confira os novos pacotes adicionados recentemente</p>
+    </section>
+
+    <!-- Cadastro -->
+    <section id="cadastro" class="section-text">
+      <button type="button" onclick="window.location.href='nova_tela.html'">
+        Cadastro
+      </button>
+      <p>Inscreva-se para ser atendido por nossos especialistas</p>
+    </section>
+
+    <!-- Suporte -->
+    <section id="suporte" class="section-text">
+      <button type="button" onclick="window.location.href='Suporte.html'">
+        Suporte ao Cliente
+      </button>
+      <p>Precisa de ajuda? Acesse aqui</p>
+    </section>
+
+    <!-- Indicação -->
+    <section id="indica-ganha" class="section-text">
+      <button type="button" onclick="window.location.href='indicacao.html'">
+        Indicação Premiada
+      </button>
+      <p>Indique um amigo</p>
+    </section>
+  </main>
+</body>
+</html>
